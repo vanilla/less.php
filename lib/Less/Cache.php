@@ -151,7 +151,7 @@ class Less_Cache{
 		Less_Cache::$cache_dir = rtrim(Less_Cache::$cache_dir,'/').'/';
 
 		if( !file_exists(Less_Cache::$cache_dir) ){
-			if( !mkdir(Less_Cache::$cache_dir) ){
+			if( !mkdir(Less_Cache::$cache_dir, 0777, true) ){
 				throw new Less_Exception_Parser('Less.php cache directory couldn\'t be created: '.Less_Cache::$cache_dir);
 			}
 
