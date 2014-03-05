@@ -34,6 +34,36 @@ class Less_Functions{
 		return min( max($val, 0), $max);
 	}
 
+    /**
+     * Write a string to a file in an atomic operation.
+     * @param string $filename Path to the file where to write the data.
+     * @param string $data The data to write.
+     * @param int $mode The file permission mode of the file.
+     * @return bool Returns true on success or false on failure.
+     */
+    static public function file_put_contents($filename, $data, $mode = 0644) {
+        $temp = tempnam(dirname($filename), 'atomic');
+
+        if (!($fp = @fopen($temp, 'wb'))) {
+            $temp = dirname($filename).DIRECTORY_SEPARATOR.uniqid('atomic');
+            if (!($fp = @fopen($temp, 'wb'))) {
+                trigger_error("file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
+                return false;
+            }
+        }
+
+        fwrite($fp, $data);
+        fclose($fp);
+
+        if (!@rename($temp, $filename)) {
+            @unlink($filename);
+            @rename($temp, $filename);
+        }
+
+        @chmod($filename, $mode);
+        return true;
+    }
+
 	static function fround( $value ){
 
 		if( Less_Parser::$options['numPrecision'] ){

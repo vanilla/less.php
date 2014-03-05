@@ -70,12 +70,12 @@ class Less_Cache{
 
 		//save the file list
 		$cache = implode("\n",$less_files);
-		file_put_contents( $list_file, $cache );
+		Less_Functions::file_put_contents( $list_file, $cache );
 
 
 		//save the css
 		$compiled_name = self::CompiledName( $less_files );
-		file_put_contents( Less_Cache::$cache_dir.$compiled_name, $compiled );
+        Less_Functions::file_put_contents( Less_Cache::$cache_dir.$compiled_name, $compiled );
 
 
 		//clean up
