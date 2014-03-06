@@ -47,7 +47,7 @@ class Less_Functions{
         if (!($fp = @fopen($temp, 'wb'))) {
             $temp = dirname($filename).DIRECTORY_SEPARATOR.uniqid('atomic');
             if (!($fp = @fopen($temp, 'wb'))) {
-                trigger_error("file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
+                trigger_error("Less_Functions::file_put_contents() : error writing temporary file '$temp'", E_USER_WARNING);
                 return false;
             }
         }

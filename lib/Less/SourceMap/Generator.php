@@ -148,7 +148,7 @@ class Less_SourceMap_Generator extends Less_Configurable {
 			throw new Exception(sprintf('The directory "%s" does not exist. Cannot save the source map.', $dir));
 		}
 		// FIXME: proper saving, with dir write check!
-		if(file_put_contents($file, $content) === false){
+		if(Less_Functions::file_put_contents($file, $content) === false){
 			throw new Exception(sprintf('Cannot save the source map to "%s"', $file));
 		}
 		return true;

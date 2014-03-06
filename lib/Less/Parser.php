@@ -489,14 +489,14 @@ class Less_Parser{
 			//msg('write cache file');
 			switch(Less_Parser::$options['cache_method']){
 				case 'serialize':
-					file_put_contents( $cache_file, serialize($rules) );
+					Less_Functions::file_put_contents( $cache_file, serialize($rules) );
 				break;
 				case 'php':
-					file_put_contents( $cache_file, '<?php return '.self::ArgString($rules).'; ?>' );
+                    Less_Functions::file_put_contents( $cache_file, '<?php return '.self::ArgString($rules).'; ?>' );
 				break;
 				case 'var_export':
 					//Requires __set_state()
-					file_put_contents( $cache_file, '<?php return '.var_export($rules,true).'; ?>' );
+                    Less_Functions::file_put_contents( $cache_file, '<?php return '.var_export($rules,true).'; ?>' );
 				break;
 			}
 
